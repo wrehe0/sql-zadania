@@ -1,0 +1,10 @@
+CREATE TABLE marks(marks varchar(255));
+CREATE TABLE colors(colors varchar(255));
+INSERT INTO marks VALUES
+('Ford'),
+('Audi');
+INSERT INTO colors VALUES
+('Red'),
+('Blue'),
+('Green');
+select * from marks, colors where marks='Ford';
