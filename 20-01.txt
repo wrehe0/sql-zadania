@@ -8,3 +8,19 @@ INSERT INTO colors VALUES
 ('Blue'),
 ('Green');
 select * from marks, colors where marks='Ford';
+
+
+
+другое задание
+ пример объединения с union
+CREATE TABLE t1 (autor varchar(255),book varchar(255));
+INSERT INTO t1 VALUES
+('lev tolstoy','war and peace'),
+('ivan tyrgenev','novi');
+CREATE TABLE t2 (autor varchar(255),book varchar(255));
+INSERT INTO t2 VALUES
+('charls dickens','hard time'),
+('p.bacn','sequll');
+ SELECT autor,book FROM t1 
+ UNION ALL
+ SELECT autor,book FROM t2;

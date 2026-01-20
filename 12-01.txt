@@ -20,3 +20,32 @@ SELECT *
   FROM user2 as A1
   JOIN bb2 as B1
     ON B1.id = A1.id
+
+    CREATE TABLE t1 (autor varchar(255),book varchar(255));
+INSERT INTO t1 VALUES
+('lev tolstoy','war and peace'),
+('ivan tyrgenev','novi');
+CREATE TABLE t2 (autor varchar(255),book varchar(255));
+INSERT INTO t2 VALUES
+('charls dickens','hard time'),
+('p.bacn','sequll');
+ SELECT autor,book FROM t1 
+ UNION ALL
+ SELECT autor,book FROM t2;
+
+ проверка union 
+
+ CREATE TABLE t1 (autor varchar(255),book varchar(255));
+INSERT INTO t1 VALUES
+('lev tolstoy','war and peace'),
+('ivan tyrgenev','novi');
+CREATE TABLE t2 (autor varchar(255),book varchar(255));
+INSERT INTO t2 VALUES
+('charls dickens','hard time'),
+('p.bacn','sequll');
+
+
+ select count(*) from (
+SELECT autor,book FROM t1 UNION 
+SELECT autor,book FROM t1 UNION  
+SELECT autor,book FROM t2);
