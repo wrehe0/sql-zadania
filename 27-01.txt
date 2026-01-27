@@ -1,0 +1,74 @@
+обьединить таблицы и вывести самый большой день
+
+ CREATE TABLE firsttable(name varchar(255), age int);
+ insert into firsttable (name,age) values 
+ ('masha',18),
+ ('sveta',19),
+ ('ola',21);
+
+ CREATE TABLE secondtable(name varchar(255), ves int, day int);
+ insert into secondtable (name,ves,day) values 
+ ('masha',53,12),
+ ('sveta',51,3),
+ ('ola', 52,4);
+
+  SELECT * FROM firsttable as a1 LEFT JOIN secondtable as a2 ON a1.name = a2.name
+  order by a2.day DESC limit 1; 
+команда для вывода среднего значения
+ SELECT AVG (ves) from secondtable;
+вывод среднего значения для всех 
+ SELECT AVG (ves) from secondtable
+ Group by secondtable.name
+итоговая таблица 
+ CREATE TABLE firsttable(name varchar(255), age int);
+ insert into firsttable (name,age) values 
+ ('masha',18),
+ ('sveta',19),
+ ('ola',21);
+
+ CREATE TABLE secondtable(name varchar(255), ves int, day int);
+ insert into secondtable (name,ves,day) values 
+ ('masha',53,12),
+ ('sveta',51,3),
+ ('ola', 52,4);
+
+ SELECT * FROM firsttable as a1 LEFT JOIN secondtable as a2 ON a1.name = a2.name
+ order by a2.day DESC limit 1;
+ 
+ SELECT AVG (ves) from secondtable
+ Group by secondtable.name
+сгрупировать по имени и департаменту
+ CREATE TABLE firsttable(dep int, name int, tax int);
+ insert into firsttable (dep,name,tax)values 
+ (1,101,3 ),
+ (2,102,5 ),
+ (1,101,7),
+ (1,103,8 ),
+ (3,104,9),
+ (1,104,10);
+ 
+ select dep,name,tax from firsttable;
+
+ select firsttable.dep , firsttable.name , sum(tax) from firsttable
+ Group by firsttable.dep,firsttable.name
+ having firsttable.dep = 1 and firsttable.name = 101
+задача про лошадей, надо доделать, сделать правильные запросы через jionы ориентироваться на листочек 
+ CREATE TABLE horses(nickname varchar(225), gender varchar(225), age int, horseid int);
+ insert into horses (nickname,gender,age,horseid)values 
+ ('star','male',12,101),
+ ('inu','female',9,102),
+ ('akzah','male',15,103);
+ select nickname,gender,age,horseid from horses;
+ CREATE TABLE owners(name varchar(225), adress varchar(225), age int, phone int,ownerid int);
+ insert into owners (name,adress,age,phone,ownerid)values 
+ ('oleg','дом пушкина',49,7347658366,201),
+ ('diana','дом лермонтова',19,7873456934,202),
+ ('prochor','дом шаляпина',53,7318746722,203);
+ select name,adress,age,phone,ownerid from owners;
+ CREATE TABLE jockey(name varchar(225), adress varchar(225),age int, rating int, jockeyid);
+ insert into jockey (name,adress,age,rating,jockeyid)values
+ ('john','дом ленина',35,66,301),
+ ('bob','дом сталина',32,34,302),
+ ('martin','дом горбачева',29,22,303);
+ select name,adress,age,rating,jockeyid from jockey;
+ create table zaezd(day datetime,
