@@ -1,49 +1,50 @@
--- 1. Владельцы (имя, адрес, телефон)
-CREATE TABLE owners (
+Задача про лошадей
+ -- 1. Владельцы (имя, адрес, телефон)
+ CREATE TABLE owners (
     id INT PRIMARY KEY,
     name VARCHAR(100),
     address VARCHAR(200),
     phone VARCHAR(20)
-);
+ );
 
--- 2. Жокеи (имя, адрес, возраст, рейтинг)
-CREATE TABLE jockeys (
+ -- 2. Жокеи (имя, адрес, возраст, рейтинг)
+ CREATE TABLE jockeys (
     id INT PRIMARY KEY,
     name VARCHAR(100),
     address VARCHAR(200),
     age INT,
     rating DECIMAL(3,1)
-);
+ );
 
--- 3. Лошади (кличка, пол, возраст, владелец)
-CREATE TABLE horses (
+ -- 3. Лошади (кличка, пол, возраст, владелец)
+ CREATE TABLE horses (
     id INT PRIMARY KEY,
     name VARCHAR(50),
     gender VARCHAR(10),
     age INT,
     owner_id INT,
     FOREIGN KEY (owner_id) REFERENCES owners(id)
-);
+ );
 
--- 4. Соревнования (дата, время, ипподром, название)
-CREATE TABLE competitions (
+ -- 4. Соревнования (дата, время, ипподром, название)
+ CREATE TABLE competitions (
     id INT PRIMARY KEY,
     date DATE,
     time TIME,
     racecourse VARCHAR(100),
     title VARCHAR(200)
-);
+ );
 
--- 5. Заезды (номер заезда, соревнование)
-CREATE TABLE races (
+ -- 5. Заезды (номер заезда, соревнование)
+ CREATE TABLE races (
     id INT PRIMARY KEY,
     competition_id INT,
     race_number INT,
     FOREIGN KEY (competition_id) REFERENCES competitions(id)
-);
+ );
 
--- 6. Результаты (заезд, лошадь, жокей, место, время)
-CREATE TABLE results (
+ -- 6. Результаты (заезд, лошадь, жокей, место, время)
+ CREATE TABLE results (
     id INT PRIMARY KEY,
     race_id INT,
     horse_id INT,
@@ -53,46 +54,46 @@ CREATE TABLE results (
     FOREIGN KEY (race_id) REFERENCES races(id),
     FOREIGN KEY (horse_id) REFERENCES horses(id),
     FOREIGN KEY (jockey_id) REFERENCES jockeys(id)
-);
+ );
 
--- Вставляем 3 владельца
-INSERT INTO owners (id, name, address, phone) VALUES 
-(1, 'Иван Петров', 'Москва, ул. Ленина, 10', '+7-999-1111111'),
-(2, 'Мария Сидорова', 'Санкт-Петербург, ул. Пушкина, 5', '+7-999-2222222'),
-(3, 'Алексей Иванов', 'Казань, ул. Гагарина, 15', '+7-999-3333333');
+ -- Вставляем 3 владельца
+ INSERT INTO owners (id, name, address, phone) VALUES 
+ (1, 'Иван Петров', 'Москва, ул. Ленина, 10', '+7-999-1111111'),
+ (2, 'Мария Сидорова', 'Санкт-Петербург, ул. Пушкина, 5', '+7-999-2222222'),
+ (3, 'Алексей Иванов', 'Казань, ул. Гагарина, 15', '+7-999-3333333');
 
--- Вставляем 3 жокея
-INSERT INTO jockeys (id, name, address, age, rating) VALUES
-(1, 'Алексей Смирнов', 'Москва, ул. Тверская, 20', 28, 8.5),
-(2, 'Дмитрий Козлов', 'Москва, ул. Арбат, 30', 35, 9.2),
-(3, 'Екатерина Волкова', 'Санкт-Петербург, ул. Невский, 25', 31, 8.8);
-
--- Вставляем 3 лошади
-INSERT INTO horses (id, name, gender, age, owner_id) VALUES
-(1, 'Буран', 'жеребец', 5, 1),
-(2, 'Звезда', 'кобыла', 4, 2),
-(3, 'Ветер', 'мерин', 6, 3);
-
--- Вставляем 3 соревнования
-INSERT INTO competitions (id, date, time, racecourse, title) VALUES
-(1, '2024-06-15', '14:00:00', 'Московский ипподром', 'Кубок весны'),
-(2, '2024-06-22', '15:30:00', 'Московский ипподром', 'Большой приз'),
-(3, '2024-07-01', '13:00:00', 'Петербургский ипподром', NULL);
-
--- Вставляем 3 заезда
-INSERT INTO races (id, competition_id, race_number) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 2, 1);
-
--- Вставляем 3 результата
-INSERT INTO results (id, race_id, horse_id, jockey_id, place, finish_time) VALUES
-(1, 1, 1, 1, 1, '01:23:45'),
-(2, 1, 2, 2, 2, '01:24:10'),
-(3, 2, 3, 3, 1, '02:15:30');
-
--- Выводим всю информацию о скачках как в задании
-SELECT 
+ -- Вставляем 3 жокея
+ INSERT INTO jockeys (id, name, address, age, rating) VALUES
+ (1, 'Алексей Смирнов', 'Москва, ул. Тверская, 20', 28, 8.5),
+ (2, 'Дмитрий Козлов', 'Москва, ул. Арбат, 30', 35, 9.2),
+ (3, 'Екатерина Волкова', 'Санкт-Петербург, ул. Невский, 25', 31, 8.8);
+ 
+ -- Вставляем 3 лошади
+ INSERT INTO horses (id, name, gender, age, owner_id) VALUES
+ (1, 'Буран', 'жеребец', 5, 1),
+ (2, 'Звезда', 'кобыла', 4, 2),
+ (3, 'Ветер', 'мерин', 6, 3);
+ 
+ -- Вставляем 3 соревнования
+ INSERT INTO competitions (id, date, time, racecourse, title) VALUES
+ (1, '2024-06-15', '14:00:00', 'Московский ипподром', 'Кубок весны'),
+ (2, '2024-06-22', '15:30:00', 'Московский ипподром', 'Большой приз'),
+ (3, '2024-07-01', '13:00:00', 'Петербургский ипподром', NULL);
+ 
+ -- Вставляем 3 заезда
+ INSERT INTO races (id, competition_id, race_number) VALUES
+ (1, 1, 1),
+ (2, 1, 2),
+ (3, 2, 1);
+ 
+ -- Вставляем 3 результата
+ INSERT INTO results (id, race_id, horse_id, jockey_id, place, finish_time) VALUES
+ (1, 1, 1, 1, 1, '01:23:45'),
+ (2, 1, 2, 2, 2, '01:24:10'),
+ (3, 2, 3, 3, 1, '02:15:30');
+ 
+ -- Выводим всю информацию о скачках как в задании
+ SELECT 
     c.date AS 'Дата',
     c.time AS 'Время',
     c.racecourse AS 'Ипподром',
@@ -102,9 +103,29 @@ SELECT
     j.name AS 'Имя жокея',
     res.place AS 'Место',
     res.finish_time AS 'Время заезда'
-FROM results res
-JOIN races r ON res.race_id = r.id
-JOIN competitions c ON r.competition_id = c.id
-JOIN horses h ON res.horse_id = h.id
-JOIN jockeys j ON res.jockey_id = j.id
-ORDER BY c.date, r.race_number, res.place;
+ FROM results res
+ JOIN races r ON res.race_id = r.id
+ JOIN competitions c ON r.competition_id = c.id
+ JOIN horses h ON res.horse_id = h.id
+ JOIN jockeys j ON res.jockey_id = j.id
+ ORDER BY c.date, r.race_number, res.place;
+Здача про оценки на ключи и удаление
+ CREATE TABLE students(
+  name_PK varchar(255) PRIMARY KEY, 
+  age int);
+
+ insert into students (name_PK,age) values 
+ ('masha',18),
+ ('galia',19),
+ ('sveta',20);
+
+ CREATE TABLE grades(
+ name_FK varchar(255), 
+ credits int, 
+ CONSTRAINT fk_name FOREIGN KEY (name_FK) 
+    REFERENCES students(name_PK) ON DELETE CASCADE);
+
+ insert into grades (name_FK,credits) values 
+ ('masha',3),
+ ('sveta',4),
+ ('galia',6);
